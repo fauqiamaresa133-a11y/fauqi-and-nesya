@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Peminjaman Barang & Peralatan Kelas</title>
+  
+  <!-- FontAwesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- File CSS Eksternal -->
+  <link rel="stylesheet" href="front end.css">
+</head>
+<body>
+
+  <!-- ==================== HALAMAN LOGIN ==================== -->
+  <div class="login-container" id="loginPage">
+    <div class="login-card">
+      <div class="login-logo">
+        <i class="fa-solid fa-graduation-cap"></i>
+      </div>
+      <h2>Aplikasi Peminjaman</h2>
+      <p>Barang & Peralatan Kelas</p>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <i class="fa-regular fa-user input-icon"></i>
+          <input type="text" id="nimInput" placeholder="Username / NIM (Cth: 24101001 atau petugas)" required>
+        </div>
+        <div class="form-group">
+          <i class="fa-solid fa-lock input-icon"></i>
+          <input type="password" id="passwordInput" placeholder="Password" required>
+          <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+        </div>
+        <button type="submit" class="btn-submit">Masuk</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== DASHBOARD & UTAMA LAYOUT ==================== -->
+  <div class="app-layout" id="appLayout">
+    
+    <!-- HEADER ATAS -->
+    <div class="top-header">
+      <div class="header-brand">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <h1>Aplikasi Peminjaman Barang & Peralatan Kelas</h1>
+      </div>
+      <div class="header-right">
+        <div class="top-search">
+          <input type="text" id="globalSearchInput" placeholder="Cari di aplikasi...">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div class="admin-profile" id="logoutBtn" title="Klik untuk Logout">
+          <div class="profile-avatar">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <span class="profile-name" id="userNameDisplay">Petugas Admin</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY APLIKASI -->
+    <div class="app-body">
+      <!-- SIDEBAR NAVIGASI -->
+      <div class="sidebar">
+        <ul class="sidebar-menu">
+          <li class="active" data-target="sec-dashboard"><a href="#"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+          <li data-target="sec-kategori"><a href="#"><i class="fa-solid fa-boxes-stacked"></i> Kategori Barang</a></li>
+          <li data-target="sec-barang"><a href="#"><i class="fa-solid fa-box"></i> Barang</a></li>
+          <li data-target="sec-peminjam"><a href="#"><i class="fa-solid fa-user-group"></i> Peminjam</a></li>
+          <li data-target="sec-peminjaman"><a href="#"><i class="fa-solid fa-file-signature"></i> Peminjaman</a></li>
+          <li data-target="sec-riwayat-peminjaman"><a href="#"><i class="fa-solid fa-clock-rotate-left"></i>Riwayat Peminjaman</a></li>
+          <li data-target="sec-pengembalian"><a href="#"><i class="fa-solid fa-rotate-left"></i> Pengembalian</a></li>
+          <li data-target="sec-laporan"><a href="#"><i class="fa-solid fa-file-lines"></i> Laporan</a></li>
+          <li data-target="sec-logout"><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+        </ul>
+      </div>
+
+      <!-- KONTEN UTAMA -->
+      <div class="main-wrapper">
+        
+        <!-- SECTION 1: DASHBOARD -->
+        <div id="sec-dashboard" class="view-section active">
+          <h2 class="page-title">Dashboard Utama</h2>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fa-solid fa-box"></i></div>
+              <div class="stat-info">
+                <span>Total Barang</span>
+                <h2>30</h2>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fa-regular fa-user"></i></div>
+              <div class="stat-info">
+                <span>Total Peminjam</span>
+                <h2>2</h2>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fa-regular fa-calendar-check"></i></div>
+              <div class="stat-info">
+                <span>Peminjaman Aktif</span>
+                <h2>6</h2>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i class="fa-solid fa-rotate-left"></i></div>
+              <div class="stat-info">
+                <span>Pengembalian Hari Ini</span>
+                <h2>2</h2>
+              </div>
+            </div>
+          </div>
+
+          <h4 style="margin-bottom: 15px; font-weight: 600;">Peminjaman Terbaru</h4>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Barang/Ruang</th>
+                  <th>Tgl Pinjam</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2</td>
+                  <td>nor baiti</td>
+                  <td>Laptop</td>
+                  <td>12/10/2025</td>
+                  <td><span class="badge badge-blue">Dipinjam</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Diva Esa Aulia</td>
+                  <td>Proyektor</td>
+                  <td>10/10/2025</td>
+                  <td><span class="badge badge-blue">Dipinjam</span></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Fazura</td>
+                  <td>Ruang Kelas</td>
+                  <td>08/10/2025</td>
+                  <td><span class="badge badge-green">Dikembalikan</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SECTION 2: KATEGORI BARANG -->
+        <div id="sec-kategori" class="view-section">
+          <h2 class="page-title">Kategori Barang</h2>
+          <div class="action-bar">
+            <div class="action-left">
+              <button class="btn-add" onclick="openModal('Tambah Kategori')"><i class="fa-solid fa-plus"></i> Tambah Kategori</button>
+              <button class="btn-filter" onclick="alert('Fitur Filter Kategori')"><i class="fa-solid fa-filter"></i> Filter</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>ID Kategori</th>
+                  <th>Nama Kategori</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>id_kategori</td><td>Laptop</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>2</td><td>id_kategori</td><td>Proyektor</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>3</td><td>id_kategori</td><td>Alat Tulis</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>4</td><td>id_kategori</td><td>Peralatan Ruang</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>5</td><td>id_kategori</td><td>Lainnya</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SECTION 3: BARANG -->
+        <div id="sec-barang" class="view-section">
+          <h2 class="page-title">Data Master Barang</h2>
+          <div class="action-bar">
+            <div class="action-left">
+              <button class="btn-add" onclick="openModal('Tambah Barang')"><i class="fa-solid fa-plus"></i> Tambah Barang</button>
+              <button class="btn-filter" onclick="alert('Fitur Filter Barang')"><i class="fa-solid fa-filter"></i> Filter</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Kode Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Kategori</th>
+                  <th>Jumlah</th>
+                  <th>Kondisi</th>
+                  <th>Lokasi</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>id_barang</td><td>Laptop Asus</td><td>Laptop</td><td>5</td><td>Baik</td><td>Lab</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>2</td><td>id_barang</td><td>Proyektor</td><td>Proyektor</td><td>2</td><td>Baik</td><td>Ruang Kelas</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>3</td><td>id_barang</td><td>Kursi</td><td>Peralatan Ruang</td><td>20</td><td>Baik</td><td>Ruang Kelas</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>4</td><td>id_barang</td><td>Spidol</td><td>Alat Tulis</td><td>15</td><td>Baik</td><td>Lab</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>5</td><td>id_barang</td><td>Kabel HDMI</td><td>Lainnya</td><td>8</td><td>Baik</td><td>Lab</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SECTION 4: PEMINJAM -->
+        <div id="sec-peminjam" class="view-section">
+          <h2 class="page-title">Data Peminjam (Anggota)</h2>
+          <div class="action-bar">
+            <div class="action-left">
+              <button class="btn-add" onclick="openModal('Tambah Peminjam')"><i class="fa-solid fa-plus"></i> Tambah Peminjam</button>
+              <button class="btn-filter" onclick="alert('Fitur Filter Peminjam')"><i class="fa-solid fa-filter"></i> Filter</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>NIM / ID</th>
+                  <th>Nama</th>
+                  <th>Prodi</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>id_peminjam</td><td>Nor baiti</td><td>TI</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>2</td><td>id_peminjam</td><td>Diva Esa aulia</td><td>TI</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>3</td><td>id_peminjam</td><td>Fazura</td><td>TI</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>4</td><td>id_peminjam</td><td>Rizka Amelia</td><td>TI</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+                <tr><td>5</td><td>id_peminjam5</td><td>Dimas Putra</td><td>TI</td><td class="action-btns"><i class="fa-solid fa-pen"></i> <i class="fa-solid fa-trash"></i></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SECTION LAINNYA -->
+        
+<!-- SECTION PEMINJAMAN -->
+<div id="sec-peminjaman" class="view-section">
+
+    <h2 class="page-title">Form Peminjaman Barang</h2>
+    <p class="subtitle">
+        Silakan lengkapi data peminjaman barang dan peralatan kelas.
+    </p>
+
+    <div class="peminjaman-card">
+
+        <div class="form-heading">
+            <i class="fa-solid fa-file-circle-plus"></i>
+            <div>
+                <h3>Data Peminjaman</h3>
+                <p>Masukkan informasi peminjaman dengan benar.</p>
+            </div>
+        </div>
+
+        <form id="formPeminjaman">
+
+            <div class="form-grid">
+
+                <div class="form-field">
+                    <label for="idPeminjaman">ID Peminjaman</label>
+                    <input type="text" id="idPeminjaman"
+                        placeholder="Contoh: PJM001" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="nimPeminjam">NIM Peminjam</label>
+                    <input type="text" id="nimPeminjam"
+                        placeholder="Masukkan NIM" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="namaPeminjam">Nama Peminjam</label>
+                    <input type="text" id="namaPeminjam"
+                        placeholder="Masukkan nama lengkap" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="prodi">Program Studi</label>
+                    <select id="prodi" required>
+                        <option value="">Pilih Program Studi</option>
+                        <option>Teknik Informatika</option>
+                        <option>Animasi</option>
+                        <option>TRPL</option>
+                        <option>RKS</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="barangPinjam">Nama Barang</label>
+                    <select id="barangPinjam" required>
+                        <option value="">Pilih Barang</option>
+                        <option>Laptop Asus</option>
+                        <option>Proyektor</option>
+                        <option>Kursi</option>
+                        <option>Spidol</option>
+                        <option>Kabel HDMI</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="jumlahPinjam">Jumlah Barang</label>
+                    <input type="number" id="jumlahPinjam"
+                        min="1" placeholder="Masukkan jumlah" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="tanggalPinjam">Tanggal Peminjaman</label>
+                    <input type="date" id="tanggalPinjam" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="tanggalKembali">Tanggal Pengembalian</label>
+                    <input type="date" id="tanggalKembali" required>
+                </div>
+
+                <div class="form-field full-width">
+                    <label for="keperluan">Keperluan Peminjaman</label>
+                    <textarea id="keperluan" rows="4"
+                        placeholder="Tuliskan keperluan peminjaman..."
+                        required></textarea>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button type="reset" class="btn-reset">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Reset
+                </button>
+
+                <button type="submit" class="btn-save">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Simpan Peminjaman
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- SECTION DETAIL PEMINJAM -->
+<div id="sec-peminjam" class="view-section">
+
+    <h2 class="page-title">Detail Data Peminjam</h2>
+    <p class="subtitle">
+        Informasi lengkap anggota yang terdaftar sebagai peminjam barang.
+    </p>
+
+    <div class="detail-peminjam-card">
+
+        <div class="detail-header">
+            <div class="detail-icon">
+                <i class="fa-solid fa-user-graduate"></i>
+            </div>
+
+            <div>
+                <h3>Informasi Peminjam</h3>
+                <p>Data identitas anggota</p>
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-picture">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="profile-info">
+                <h2 id="detailNama">Fauqii Amaresa</h2>
+                <span class="status-anggota">Anggota Aktif</span>
+                <p>Mahasiswa Teknik Informatika</p>
+            </div>
+        </div>
+
+        <div class="detail-information">
+
+            <div class="information-item">
+                <span>NIM / ID Peminjam</span>
+                <strong id="detailNim">3312601017</strong>
+            </div>
+
+            <div class="information-item">
+                <span>Nama Lengkap</span>
+                <strong id="detailNamaLengkap">Fauqii Amaresa</strong>
+            </div>
+
+            <div class="information-item">
+                <span>Program Studi</span>
+                <strong id="detailProdi">Teknik Informatika</strong>
+            </div>
+
+            <div class="information-item">
+                <span>Status Anggota</span>
+                <strong>Aktif</strong>
+            </div>
+
+            <div class="information-item">
+                <span>Total Peminjaman</span>
+                <strong>5 Transaksi</strong>
+            </div>
+
+            <div class="information-item">
+                <span>Riwayat Pengembalian</span>
+                <strong>4 Barang Dikembalikan</strong>
+            </div>
+
+        </div>
+
+        <div class="detail-actions">
+            <button class="btn-detail-back"
+                onclick="showSection('sec-peminjam')">
+                <i class="fa-solid fa-arrow-left"></i>
+                Kembali
+            </button>
+
+            <button class="btn-detail-edit"
+                onclick="alert('Fitur edit data peminjam')">
+                <i class="fa-solid fa-pen"></i>
+                Edit Data
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- SECTION RIWAYAT PEMINJAMAN -->
+<div id="sec-riwayat-peminjaman" class="view-section">
+
+    <h2 class="page-title">Riwayat Peminjaman</h2>
+    <p class="subtitle">
+        Menampilkan seluruh transaksi peminjaman barang dan peralatan kelas.
+    </p>
+
+    <!-- RINGKASAN PEMINJAMAN -->
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-file-circle-check"></i>
+            </div>
+            <div class="stat-info">
+                <span>Total Peminjaman</span>
+                <h2>15</h2>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+            <div class="stat-info">
+                <span>Sedang Dipinjam</span>
+                <h2>5</h2>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="stat-info">
+                <span>Selesai</span>
+                <h2>10</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABEL RIWAYAT -->
+    <div class="history-card">
+
+        <div class="history-header">
+            <div>
+                <h3>Daftar Riwayat Peminjaman</h3>
+                <p>Informasi transaksi peminjaman barang.</p>
+            </div>
+
+            <div class="history-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text"
+                    id="cariRiwayatPinjam"
+                    placeholder="Cari nama atau barang...">
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="tabelRiwayatPinjam">
+
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>ID Peminjaman</th>
+                        <th>NIM</th>
+                        <th>Nama Peminjam</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Tanggal Pinjam</th>
+                        <th>Rencana Kembali</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>1</td>
+                        <td>PJM001</td>
+                        <td>3312601017</td>
+                        <td>Fauqii Amaresa</td>
+                        <td>Laptop Asus</td>
+                        <td>1</td>
+                        <td>01/11/2026</td>
+                        <td>06/11/2026</td>
+                        <td>
+                            <span class="status-pinjam">
+                                Dipinjam
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>PJM002</td>
+                        <td>3312601018</td>
+                        <td>Nesya</td>
+                        <td>Proyektor</td>
+                        <td>1</td>
+                        <td>02/11/2026</td>
+                        <td>04/11/2026</td>
+                        <td>
+                            <span class="status-selesai">
+                                Dikembalikan
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>PJM003</td>
+                        <td>3312601020</td>
+                        <td>Diva Esa Aulia</td>
+                        <td>Kabel HDMI</td>
+                        <td>2</td>
+                        <td>03/11/2026</td>
+                        <td>07/11/2026</td>
+                        <td>
+                            <span class="status-pinjam">
+                                Dipinjam
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>4</td>
+                        <td>PJM004</td>
+                        <td>3312601021</td>
+                        <td>Nor Baiti</td>
+                        <td>Laptop Asus</td>
+                        <td>1</td>
+                        <td>03/11/2026</td>
+                        <td>05/11/2026</td>
+                        <td>
+                            <span class="status-selesai">
+                                Dikembalikan
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>5</td>
+                        <td>PJM005</td>
+                        <td>3312601022</td>
+                        <td>Fazura</td>
+                        <td>Spidol</td>
+                        <td>5</td>
+                        <td>04/11/2026</td>
+                        <td>08/11/2026</td>
+                        <td>
+                            <span class="status-pinjam">
+                                Dipinjam
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="history-footer">
+            Menampilkan 5 data riwayat peminjaman
+        </div>
+
+    </div>
+
+</div>
+
+
+        
+<!-- SECTION PENGEMBALIAN BARANG -->
+<div id="sec-pengembalian" class="view-section">
+
+    <h2 class="page-title">Pengembalian Barang</h2>
+    <p class="subtitle">
+        Kelola proses pengembalian barang dan peralatan kelas.
+    </p>
+
+    <div class="return-card">
+
+        <div class="return-heading">
+            <div class="return-icon">
+                <i class="fa-solid fa-rotate-left"></i>
+            </div>
+            <div>
+                <h3>Form Pengembalian Barang</h3>
+                <p>Lengkapi informasi barang yang dikembalikan.</p>
+            </div>
+        </div>
+
+        <form id="formPengembalian">
+
+            <h4 class="return-section-title">
+                <i class="fa-solid fa-clipboard-list"></i>
+                Informasi Peminjaman
+            </h4>
+
+            <div class="return-grid">
+
+                <div class="return-field">
+                    <label for="idPinjamKembali">ID Peminjaman</label>
+                    <input type="text" id="idPinjamKembali"
+                        placeholder="Contoh: PJM001" required>
+                </div>
+
+                <div class="return-field">
+                    <label for="namaPeminjamKembali">Nama Peminjam</label>
+                    <input type="text" id="namaPeminjamKembali"
+                        placeholder="Masukkan nama peminjam" required>
+                </div>
+
+                <div class="return-field">
+                    <label for="nimKembali">NIM Peminjam</label>
+                    <input type="text" id="nimKembali"
+                        placeholder="Masukkan NIM" required>
+                </div>
+
+                <div class="return-field">
+                    <label for="barangKembali">Nama Barang</label>
+                    <input type="text" id="barangKembali"
+                        placeholder="Masukkan nama barang" required>
+                </div>
+
+                <div class="return-field">
+                    <label for="jumlahKembali">Jumlah Barang</label>
+                    <input type="number" id="jumlahKembali"
+                        min="1" placeholder="Jumlah barang" required>
+                </div>
+
+                <div class="return-field">
+                    <label for="tanggalPinjamKembali">Tanggal Peminjaman</label>
+                    <input type="date" id="tanggalPinjamKembali" required>
+                </div>
+
+                <div class="return-field">
+                    <label for="tanggalDikembalikan">Tanggal Pengembalian</label>
+                    <input type="date" id="tanggalDikembalikan" required>
+                </div>
+
+                <div class="return-field">
+                    <label for="kondisiBarang">Kondisi Barang</label>
+                    <select id="kondisiBarang" required>
+                        <option value="">Pilih Kondisi</option>
+                        <option value="Baik">Baik</option>
+                        <option value="Rusak">Rusak</option>
+                        <option value="Hilang">Hilang</option>
+                    </select>
+                </div>
+
+                <div class="return-field full-width">
+                    <label for="catatanKembali">Catatan Pengembalian</label>
+                    <textarea id="catatanKembali" rows="4"
+                        placeholder="Tambahkan keterangan jika diperlukan..."></textarea>
+                </div>
+
+            </div>
+
+            <div class="return-actions">
+                <button type="reset" class="btn-return-reset">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Reset
+                </button>
+
+                <button type="submit" class="btn-return-save">
+                    <i class="fa-solid fa-check"></i>
+                    Proses Pengembalian
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+        <div id="sec-laporan" class="view-section">
+
+    <div class="page-header">
+        <h2 class="page-title">Laporan Peminjaman</h2>
+        <p class="page-description">
+            Rekap data peminjaman dan pengembalian barang kelas.
+        </p>
+    </div>
+
+    <!-- Ringkasan laporan -->
+    <div class="report-summary">
+
+        <div class="report-card">
+            <i class="fa-solid fa-box"></i>
+            <div>
+                <h3>25</h3>
+                <p>Total Peminjaman</p>
+            </div>
+        </div>
+
+        <div class="report-card">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+                <h3>8</h3>
+                <p>Sedang Dipinjam</p>
+            </div>
+        </div>
+
+        <div class="report-card">
+            <i class="fa-solid fa-circle-check"></i>
+            <div>
+                <h3>17</h3>
+                <p>Sudah Dikembalikan</p>
+            </div>
+        </div>
+
+        <div class="report-card">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div>
+                <h3>2</h3>
+                <p>Barang Bermasalah</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Filter laporan -->
+    <div class="report-container">
+
+        <div class="report-toolbar">
+            <div>
+                <h3>Data Laporan</h3>
+                <p>Daftar transaksi peminjaman barang</p>
+            </div>
+
+            <div class="report-actions">
+                <input
+                    type="text"
+                    id="cariLaporan"
+                    placeholder="Cari nama atau barang..."
+                >
+
+                <button onclick="cetakLaporan()" class="btn-print">
+                    <i class="fa-solid fa-print"></i>
+                    Cetak Laporan
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabel laporan -->
+        <div class="table-container">
+            <table id="tabelLaporan">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>ID Peminjaman</th>
+                        <th>NIM</th>
+                        <th>Nama Peminjam</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Tanggal Pinjam</th>
+                        <th>Tanggal Kembali</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>PJM001</td>
+                        <td>3312601017</td>
+                        <td>Fauqii Amaresa</td>
+                        <td>Proyektor</td>
+                        <td>1</td>
+                        <td>01-11-2026</td>
+                        <td>03-11-2026</td>
+                        <td><span class="status-selesai">Dikembalikan</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>PJM002</td>
+                        <td>3312601018</td>
+                        <td>Nesya</td>
+                        <td>Kabel HDMI</td>
+                        <td>2</td>
+                        <td>02-11-2026</td>
+                        <td>-</td>
+                        <td><span class="status-pinjam">Dipinjam</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>PJM003</td>
+                        <td>3312601019</td>
+                        <td>Andi</td>
+                        <td>Speaker</td>
+                        <td>1</td>
+                        <td>03-11-2026</td>
+                        <td>04-11-2026</td>
+                        <td><span class="status-selesai">Dikembalikan</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+<!-- HALAMAN KONFIRMASI LOGOUT -->
+<div id="sec-logout" class="view-section">
+
+    <div class="logout-container">
+
+        <div class="logout-card">
+
+            <div class="logout-icon">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+
+            <h2>Konfirmasi Logout</h2>
+
+            <p>
+                Apakah kamu yakin ingin keluar dari
+                aplikasi Peminjaman Barang dan Peralatan Kelas?
+            </p>
+
+            <div class="logout-buttons">
+
+                <button
+                    type="button"
+                    class="btn-cancel-logout"
+                    onclick="batalLogout()">
+                    Batal
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-confirm-logout"
+                    onclick="konfirmasiLogout()">
+                    Ya, Logout
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DIALOG -->
+  <div class="modal" id="dataModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id="modalTitle">Tambah Data</span>
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+      </div>
+      <form id="modalForm">
+        <div class="form-group" style="margin-bottom: 12px;">
+          <input type="text" placeholder="Masukkan detail data..." style="padding-left: 12px;" required>
+        </div>
+        <button type="submit" class="btn-submit">Simpan Data</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- File JavaScript Eksternal -->
+  <script src="front end.js"></script>
+</body>
+</html>
+
+
+
+
